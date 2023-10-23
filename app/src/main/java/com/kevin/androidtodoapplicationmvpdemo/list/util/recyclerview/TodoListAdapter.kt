@@ -1,5 +1,8 @@
 package com.kevin.androidtodoapplicationmvpdemo.list.util.recyclerview
 
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -32,8 +35,21 @@ class TodoListAdapter(
         val todo = todoItemList[position]
 
         // Bind data with view
-        holder.binding.title.text = todo.title
         holder.binding.description.text = todo.description
+
+        if (todo.status == true) {
+            val spannableString = SpannableString(todo.title)
+            spannableString.setSpan(
+                StrikethroughSpan(),
+                0,
+                spannableString.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            holder.binding.title.text = spannableString
+        } else {
+            holder.binding.title.text = todo.title
+        }
+
 
         // Set click listener
         holder.binding.root.setOnClickListener {
