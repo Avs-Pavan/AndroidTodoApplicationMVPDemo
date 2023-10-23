@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.kevin.androidtodoapplicationmvpdemo"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.kevin.androidtodoapplicationmvpdemo"
@@ -33,9 +34,22 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+
+    // Room components
+    implementation("androidx.room:room-runtime:2.6.0") // Use the latest version
+    implementation("androidx.room:room-ktx:2.6.0") // Use the latest version
+    kapt("androidx.room:room-compiler:2.6.0") // Annotation processor
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2") // LiveData ViewModel
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2") //LiveData
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
