@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.room.Room
 import com.kevin.androidtodoapplicationmvpdemo.add.view.AddTodoActivity
 import com.kevin.androidtodoapplicationmvpdemo.databinding.ActivityMainBinding
+import com.kevin.androidtodoapplicationmvpdemo.edit.view.EditTodoActivity
 import com.kevin.androidtodoapplicationmvpdemo.list.contract.TodoListContract
 import com.kevin.androidtodoapplicationmvpdemo.list.model.TodoListModel
 import com.kevin.androidtodoapplicationmvpdemo.list.presenter.TodoListPresenter
@@ -58,6 +59,9 @@ class TodoListActivity : AppCompatActivity(), TodoListContract.View {
         adapter = TodoListAdapter(todoList, object : RecyclerListener {
             override fun onClick(position: Int) {
                 // enter edit mode
+                val intent = Intent(this@TodoListActivity, EditTodoActivity::class.java)
+                intent.putExtra("id", todoList[position].id)
+                startActivity(intent)
             }
 
         })

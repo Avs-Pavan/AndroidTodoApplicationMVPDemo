@@ -16,6 +16,10 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table")
     suspend fun getAll(): List<TodoItem>
 
+    // Query to get todoitem by id
+    @Query("SELECT * FROM todo_table WHERE id = :id")
+    suspend fun getById(id: Int): TodoItem
+
     // Insert todoitem to database
     @Insert
     suspend fun insert(todoItem: TodoItem): Long
